@@ -1,0 +1,22 @@
+<!--pages/buyRecord/buyRecord.wxml-->
+<view>
+  <view class='title'>
+    <view class='title-container'>
+      <text class='title-container-text'>ID</text>
+      <text class='title-container-text'>消费书币</text>
+      <text class='title-container-text'>消费用途</text>
+      <text class='title-container-text'>消费时间</text>
+    </view>
+  </view>
+
+  <view class='detail'>
+    <block wx:for="{{dataList}}">
+      <view class='detail-item'>
+        <text class='detail-item-text' style='flex-grow: 0.5;'>{{item.auto_id}}</text>
+        <text class='detail-item-text'>{{item.buy_bi}}</text>
+        <text class='detail-item-text' style='width: 30rpx;'>{{item.buy_use_for}}</text>
+        <text class='detail-item-text' style='width: 90rpx;'>{{item.buy_time}}</text>
+      </view>
+    </block>
+  </view>
+</view>

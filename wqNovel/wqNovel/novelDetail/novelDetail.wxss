@@ -1,0 +1,102 @@
+/* pages/xiaoshuoDetail/xiaoshuoDetail.wxss */
+
+.xiaoshuoDetail {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.xiaoshuoDetail-scroll {
+  display: flex;
+  flex-direction: row;
+  width: 90%;
+  margin-top: 30rpx;
+  margin-left: 30rpx;
+}
+
+.xiaoshuoDetail-scroll-guess {
+  display: flex;
+  flex-direction: row;
+}
+
+.xiaoshuoDetail-scroll-guess-item {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10rpx;
+}
+
+.xiaoshuoDetail-scroll-guess-item-text {
+  text-align: center;
+}
+
+.xiaoshuoDetail-scroll-guess-item-image {
+  height: 300rpx;
+  width: 300rpx;
+}
+
+.xiaoshuoDetail-guesstext {
+  width: 100%;
+  background: rgb(226, 223, 223);
+  color: black;
+  margin-top: 10rpx;
+  padding-left: 30rpx;
+  padding-top: 10rpx;
+  padding-bottom: 10rpx;
+}
+
+.xiaoshuoDetail-check-catalog {
+  margin-left: 100rpx;
+  width: 70%;
+  margin-top: 10rpx;
+}
+
+.xiaoshuoDetail-latisupdate {
+  margin-left: 30rpx;
+  margin-top: 30rpx;
+  display: flex;
+  flex-direction: row;
+}
+
+.xiaoshuoDetail-latisupdate-text {
+  flex-grow: 1;
+}
+
+.xiaoshuoDetail-latisupdate-updateData {
+  margin-right: 30rpx;
+}
+
+.xiaoshuoDetail-text {
+  margin-left: 30rpx;
+  margin-right: 30rpx;
+  width: 93%;
+  margin-top: 30rpx;
+}
+
+.lineone {
+  height: 400rpx;
+  width: 100%;
+  background-color: rgb(248, 239, 239);
+  display: flex;
+  flex-direction: row;
+  padding-top: 30rpx;
+}
+
+.lineone-red {
+  background-color: #f80;
+  height: 100rpx;
+  
+}
+
+.lineone-image {
+  height: 300rpx;
+  width: 300rpx;
+  margin-left: 30rpx;
+  margin-top: 10rpx;
+}
+
+.lineone-view {
+  margin-top: 10rpx;
+  display: flex;
+  flex-direction: column;
+  margin-left: 10rpx;
+}

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns="http://www.we7.cc" versionCode="">
+	<application setting="false">
+		<name><![CDATA[小程序小说]]></name>
+		<identifie><![CDATA[wqNovel]]></identifie>
+		<version><![CDATA[1.0.0]]></version>
+		<type><![CDATA[other]]></type>
+		<ability><![CDATA[小程序小说]]></ability>
+		<description><![CDATA[小程序小说]]></description>
+		<author><![CDATA[兴妮]]></author>
+		<url><![CDATA[]]></url>
+	</application>
+	<platform>
+		<subscribes>
+		</subscribes>
+		<handles>
+		</handles>
+		<rule embed="false" />
+		<card embed="false" />
+		<supports>
+			<item type="wxapp" />
+		</supports>
+	</platform>
+	<bindings>
+		<menu>
+			<entry title="充值记录" do="Addmoneyrecord" state="" direct="false" />
+			<entry title="书籍分类" do="bookkind" state="" direct="false" />
+			<entry title="书架" do="books" state="" direct="false" />
+			<entry title="消费记录" do="buyrecord" state="" direct="false" />
+			<entry title="章节目录" do="catalog" state="" direct="false" />
+			<entry title="联系我们" do="contactus" state="" direct="false" />
+			<entry title="完本小说" do="finishbook" state="" direct="false" />
+			<entry title="猜你喜欢" do="guesslike" state="" direct="false" />
+			<entry title="热门小说" do="hot" state="" direct="false" />
+			<entry title="小说简介" do="instroduce" state="" direct="false" />
+			<entry title="限时免费" do="limittimefree" state="" direct="false" />
+			<entry title="轮播图片" do="lunbo" state="" direct="false" />
+			<entry title="会员信息" do="memberinfo" state="" direct="false" />
+			<entry title="会员开通分类" do="memberkind" state="" direct="false" />
+			<entry title="会员分类说明" do="membermemo" state="" direct="false" />
+			<entry title="新书推荐" do="newbook" state="" direct="false" />
+			<entry title="小说明细" do="noveldetail" state="" direct="false" />
+			<entry title="小说内容" do="readnovel" state="" direct="false" />
+			<entry title="最近阅读" do="recentreadrecord" state="" direct="false" />
+			<entry title="充值类型" do="rechargekind" state="" direct="false" />
+			<entry title="充值说明" do="rechargememo" state="" direct="false" />
+			<entry title="小说推荐" do="tuijian" state="" direct="false" />
+			
+		</menu>
+		<page>
+			<entry title="首页" do="/wqNovel/goodChoose/goodChoose" state="" direct="" />
+		</page>
+	</bindings>
+	<permissions>
+	</permissions>
+	<install><![CDATA[install.php]]></install>
+	<uninstall><![CDATA[DROP TABLE IF EXISTS `ims_we7_wxapp_addmoneyrecord`;
+DROP TABLE IF EXISTS `ims_we7_wxapp_bookkind`;
+DROP TABLE IF EXISTS `ims_we7_wxapp_books`;
+DROP TABLE IF EXISTS `ims_we7_wxapp_buyrecord`;
+DROP TABLE IF EXISTS `ims_we7_wxapp_catalog`;
+DROP TABLE IF EXISTS `ims_we7_wxapp_contactus`;
+DROP TABLE IF EXISTS `ims_we7_wxapp_finishbook`;
+DROP TABLE IF EXISTS `ims_we7_wxapp_guesslike`;
+DROP TABLE IF EXISTS `ims_we7_wxapp_hot`;
+DROP TABLE IF EXISTS `ims_we7_wxapp_instroduce`;
+DROP TABLE IF EXISTS `ims_we7_wxapp_limittimefree`;
+DROP TABLE IF EXISTS `ims_we7_wxapp_lunbo`;
+DROP TABLE IF EXISTS `ims_we7_wxapp_memberinfo`;
+DROP TABLE IF EXISTS `ims_we7_wxapp_memberkind`;
+DROP TABLE IF EXISTS `ims_we7_wxapp_membermemo`;
+DROP TABLE IF EXISTS `ims_we7_wxapp_newbook`;
+DROP TABLE IF EXISTS `ims_we7_wxapp_noveldetail`;
+DROP TABLE IF EXISTS `ims_we7_wxapp_readnovel`;
+DROP TABLE IF EXISTS `ims_we7_wxapp_recentreadrecord`;
+DROP TABLE IF EXISTS `ims_we7_wxapp_rechargekind`;
+DROP TABLE IF EXISTS `ims_we7_wxapp_rechargememo`;
+DROP TABLE IF EXISTS `ims_we7_wxapp_tuijian`;]]></uninstall>
+	<upgrade><![CDATA[]]></upgrade>
+</manifest>

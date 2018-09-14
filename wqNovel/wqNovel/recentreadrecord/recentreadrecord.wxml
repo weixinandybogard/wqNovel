@@ -1,0 +1,12 @@
+<!--pages/recentReadRecord/recentReadRecord.wxml-->
+<view class='detail'>
+  <block wx:for='{{dataList}}'>
+    <view class='detail-item'>
+      <view class='detail-item-lefttext'>
+        <text>{{item.title}}</text>
+        <text>{{item.des}}</text>
+      </view>
+      <button bindtap='onClickRead' data-catalogAutoId='{{item.catalog_auto_id}}' class='detail-item-button'>开始阅读</button>
+    </view>
+  </block>
+</view>

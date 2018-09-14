@@ -1,0 +1,6 @@
+<template name="msgItem">
+  <view bindtap='onClickItem' data-InAutoId='{{introduce_auto_id}}' class='tuijian-view-item'>
+    <image class='tuijian-view-image' src='{{src}}'></image>
+    <text class='tuijian-view-image-text'>{{title}}</text>
+  </view>
+</template>

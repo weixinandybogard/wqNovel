@@ -1,0 +1,25 @@
+{
+  "pages": [
+    "wqNovel/goodChoose/goodChoose",
+    "wqNovel/divideKind/divideKind",
+    "wqNovel/book/book",
+    "wqNovel/my/my",
+    "wqNovel/addMoneyRecord/addMoneyRecord",
+    "wqNovel/buyRecord/buyRecord",
+    "wqNovel/recentreadrecord/recentreadrecord",
+    "wqNovel/contactUs/contactUs",
+    "wqNovel/memberKind/memberKind",
+    "wqNovel/rechargeKind/rechargeKind",
+    "wqNovel/search/search",
+    "wqNovel/novelDetail/novelDetail",
+    "wqNovel/catalog/catalog",
+    "wqNovel/readNovel/readNovel",
+    "wqNovel/bookManage/bookManage"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#f80",
+    "navigationBarTitleText": "小程序小说",
+    "navigationBarTextStyle": "black"
+  }
+}

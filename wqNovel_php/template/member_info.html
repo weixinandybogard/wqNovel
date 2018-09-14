@@ -1,0 +1,57 @@
+{template 'common/header'}
+<div class="main">
+	<form id='add_form' action="./index.php">
+		<div style="height: 30px; position: relatvie; width: 100%;">
+			<ul>
+				<li
+					style='text-decoration: none; ist-style: none; float: left; border: 1px solid #FFFFFF;'>open
+					id:</li>
+				<li><label id='open_id'>{$data[0]['open_id']}</label></li>
+				<li></li>
+			</ul>
+			<ul>
+				<li
+					style='text-decoration: none; ist-style: none; float: left; border: 1px solid #FFFFFF;'>书币:</li>
+				<li><input id='bi' name='bi' type='text'
+					value="{$data[0]['bi']}" style='width: 25%;' /></li>
+			</ul>
+
+			<ul>
+				<li><input type='button' onclick='onSave()' value='保存' /></li>
+			</ul>
+		</div>
+
+
+	</form>
+</div>
+<script>
+	var open_id = document.getElementById('open_id')
+	var bi = document.getElementById('bi')
+	var xml_http;
+	if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+		xml_http = new XMLHttpRequest();
+	} else {// code for IE6, IE5
+		xml_http = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	function onSave() {
+		xml_http.onreadystatechange = function() {
+			//alert(xml_http.status);
+			//console.log(xml_http.status);
+			if (xml_http.readyState == 4 && xml_http.status == 200) {
+				//document.getElementById("myDiv").innerHTML=;
+
+				//console.log(xml_http.responseText);
+				alert(xml_http.responseText)
+
+			}
+		}
+
+		xml_http.open("GET",
+				"index.php?c=site&a=entry&do=UpdataMemberInfo&m=wqnovel&open_id="
+						+ open_id.innerText + "&bi=" + bi.value, true);
+		xml_http.setRequestHeader("Content-type",
+				"application/x-www-form-urlencoded");
+		xml_http.send();
+	}
+</script>
+{template 'common/footer'}

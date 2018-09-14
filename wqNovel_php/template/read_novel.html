@@ -1,0 +1,252 @@
+{template 'common/header'}
+<div class="main">
+	<ul class="nav nav-tabs">
+		{if $_GPC['kind']=='小说内容列表'}
+		<li class="active"><a
+			href="{php echo $this->createWebUrl('readnovel',array('kind'=>'小说内容列表'))}">小说内容列表</a></li>
+		<li class=""><a
+			href="{php echo $this->createWebUrl('readnovel',array('kind'=>'添加小说内容'))}">添加小说内容</a></li>
+		{/if} {if $_GPC['kind']=='添加小说内容'}
+		<li class=""><a
+			href="{php echo $this->createWebUrl('readnovel',array('kind'=>'小说内容列表'))}">小说内容列表</a></li>
+		<li class="active"><a
+			href="{php echo $this->createWebUrl('readnovel',array('kind'=>'添加小说内容'))}">添加小说内容</a></li>
+		{/if}
+
+	</ul>
+	{if $_GPC['kind']=='小说内容列表'}
+	<div style="height: 30px; position: relatvie; width: 100%;">
+		<div
+			style='background-color: #f80;; border-bottom-style: outset; border-bottom-width: 1px; line-height: 30px; height: 30px;; width: 10%; position: relative; float: left; text-align: center'>
+			选择</div>
+		<div
+			style='background-color: #f80;; border-bottom-style: outset; border-bottom-width: 1px; line-height: 30px; height: 30px;; width: 10%; position: relative; float: left; text-align: center'>
+			编号</div>
+		<div
+			style='background-color: #f80;; border-bottom-style: outset; border-bottom-width: 1px; line-height: 30px; height: 30px;; width: 10%; position: relative; float: left; text-align: center'>
+			章编号</div>
+		<div
+			style='background-color: #f80;; border-bottom-style: outset; border-bottom-width: 1px; line-height: 30px; height: 30px;; width: 70%; position: relative; float: left; text-align: center'>
+			小说内容</div>
+
+	</div>
+	<form id='dataForm' action="./index.php">
+		<input type="hidden" name="a" value="entry" /> <input type="hidden"
+			name="c" value="site" /> <input type="hidden" name="m"
+			value="wqNovel" /> <input id='del_hidden' type="hidden" name="do"
+			value="readnovel" /><input type='hidden' id='current_page'
+			name='current_page' value="{$current_page}" /> <input type='hidden'
+			id='direct' name='direct' value="+" />
+		<div style="height: 30px; position: relatvie; width: 100%;">
+			{loop $data $item}
+			<div style="height: 30px; position: relatvie; width: 100%;">
+				<div
+					style='border-bottom-style: outset; height: 30px; border-bottom-width: 1px; width: 10%; line-height: 30px; position: static; float: left; text-align: center'>
+					<input id="check{$item['auto_id']}"
+						name="checkvalue{$item['auto_id']}" type="checkbox" />
+				</div>
+				<div
+					style='border-bottom-style: outset; height: 30px; border-bottom-width: 1px; overflow: hidden; width: 10%; line-height: 30px; position: static; float: left; text-align: center'>
+					{$item['auto_id']}</div>
+				<div
+					style='border-bottom-style: outset; height: 30px; border-bottom-width: 1px; overflow: hidden; overflow: hidden; width: 10%; line-height: 30px; position: static; float: left; text-align: center'>
+					{$item['catalog_auto_id']}</div>
+				<div
+					style='border-bottom-style: outset; height: 30px; border-bottom-width: 1px; overflow: hidden; width: 70%; line-height: 30px; position: static; float: left; text-align: center'>
+					{$item['content']}</div>
+
+
+			</div>
+			{/loop}
+			<div id="command"
+				style='margin-top: 10px; text-align: right; width: 85%;'>
+				{if $is_first==true} <input type="button" onclick='onFirst()'
+					value="首页" />{/if} {if $is_pre==true} <input type="button"
+					onclick="onPre()" value="上一页" />{/if} {if $is_next==true} <input
+					type="button" onclick="onNextPage()" value="下一页" />{/if} {if
+				$is_last==true} <input onclick="onLastPage()" type="button"
+					value="末页" /> {/if}<input type="button" id='selectInput'
+					onclick="onSelect()" value="全选" /> <input type="button"
+					onclick="onDel()" value='删除'></input>
+			</div>
+		</div>
+	</form>
+	{/if} {if $_GPC['kind']=='添加小说内容'}
+	<form id='add_form' action="./index.php">
+		<div style="height: 30px; position: relatvie; width: 100%;">
+			<ul>
+				<li
+					style='text-decoration: none; ist-style: none; float: left; border: 1px solid #FFFFFF;'>章编号:</li>
+				<li><input id='catalog_auto_id' onblur='onBlurInstroduce()'
+					name='catalog_auto_id' type='number' style='width: 70%;' /></li>
+			</ul>
+			<ul>
+				<li
+					style='text-decoration: none; ist-style: none; float: left; border: 1px solid #FFFFFF;'>小说内容:</li>
+				<li><textarea style='width: 90%; height: 300px;' id='content'></textarea></li>
+			</ul>
+			<ul>
+				<li><input type='button' onclick='onSave()' value='保存' /></li>
+			</ul>
+		</div>
+	</form>
+	{/if}
+</div>
+<script>
+	var selectInput = document.getElementById('selectInput');//选择按钮
+	var dataForm = document.getElementById('dataForm');//列表表单
+	var current_page = document.getElementById('current_page');//当前页
+	var direct = document.getElementById('direct');//方向
+	var del_hidden = document.getElementById('del_hidden')
+	var catalog_auto_id = document.getElementById('catalog_auto_id')
+	var content = document.getElementById('content')
+
+	var xml_http;
+	if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+		xml_http = new XMLHttpRequest();
+	} else {// code for IE6, IE5
+		xml_http = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+
+	xml_http.onreadystatechange = function() {
+		//alert(xml_http.status);
+		//console.log(xml_http.status);
+
+		if (xml_http.readyState == 4 && xml_http.status == 200) {
+			//console.log(xml_http.responseText);
+			//document.getElementById("myDiv").innerHTML=;
+			var obj = JSON.parse(xml_http.responseText);
+			var result = '';
+			for ( var i = 0; i < obj.length; i++) {
+				//console.log(obj[i].title)
+				result += obj[i].auto_id + "," + obj[i].catalog + ";";
+			}
+			//console.log(result);
+			catalog_auto_id.placeholder = result;
+		}
+	}
+	xml_http
+			.open(
+					"GET",
+					"./index.php?c=site&a=entry&do=GetCatalogAutoId&m=wqnovel",
+					true);
+	xml_http.send();
+	
+	
+	
+	function onSave(){
+		if (catalog_auto_id.value.trim() == '') {
+			alert('章编号不能空')
+			return;
+		}
+		
+		if (content.value.trim() == '') {
+			alert('小说内容不能空')
+			return
+		}
+		
+		
+		xml_http.onreadystatechange = function()
+		{
+			//alert(xml_http.status);
+			//console.log(xml_http.status);
+			
+		  if (xml_http.readyState == 4 && xml_http.status == 200)
+		  {
+			alert(xml_http.responseText)
+		  }
+		}
+		xml_http.open("GET","./index.php?c=site&a=entry&do=readnovelInsert&m=wqnovel&catalog_auto_id=" + catalog_auto_id.value + 
+				"&content=" + content.value ,true);
+		xml_http.send()
+	}
+	
+	function onBlurInstroduce(){
+		xml_http.onreadystatechange = function()//处理结果
+		{
+			//alert(xml_http.status);
+			//console.log(xml_http.status);
+			
+		  if (xml_http.readyState == 4 && xml_http.status == 200)
+		  {
+			  //如果返回空所有都是空的
+			  if(xml_http.responseText == 'null') {
+				  alert('章编号错误或没输入')
+				  return
+			  }
+			  if (xml_http.responseText == '章编号不存在') {
+				  catalog_auto_id.value = ''
+				  content.value = ''
+				  alert(xml_http.responseText)
+				  return;//如果没有东西返回,就退出处理
+			  } 
+			//如果返回空所有都是空的
+			  
+			
+			//付给对应的值
+			  //var obj = JSON.parse(xml_http.responseText);
+			//console.log(obj.title)
+			//console.log(obj.src)
+			  //pic_addr.innerText = obj.src
+			  //title.innerText = obj.title
+			//付给对应的值
+		  	//introduce_auto_id.placeholder = result;
+		  }
+		}
+		
+		xml_http.open("GET","./index.php?c=site&a=entry&do=CheckCatalogIdExists&m=wqnovel&catalog_auto_id=" 
+				+ catalog_auto_id.value,true);//请求
+		xml_http.send();//发送请求
+	}
+
+	//第一页
+	function onFirst() {
+		direct.value = '+'
+		current_page.value = 0//当前页恢复
+		dataForm.submit()
+	}
+
+	//前一页
+	function onPre() {
+		direct.value = '-';
+		dataForm.submit();
+	}
+	//下一页
+	function onNextPage() {
+		direct.value = '+';
+		dataForm.submit();
+	}
+	//最后一页
+	function onLastPage() {
+		direct.value = "++";
+		dataForm.submit();
+
+	}
+	//删除后当前页复原
+	function onDel() {
+		//alert('fdsfds')
+		del_hidden.value = 'realnovelDel';
+		current_page.value = 0
+
+		dataForm.submit();
+	}
+
+	//选择所有
+	// 	
+		function onSelect() {
+				if (selectInput.value == "全选") {
+					{loop $data $item}
+					document.getElementById('check' + {$item['auto_id']}).checked="1"
+
+					{/loop}
+					selectInput.value = '反全选'
+				} else {
+					selectInput.value = '全选'
+					{loop $data $item}
+					document.getElementById('check' + {$item['auto_id']}).checked=null;
+
+					{/loop}
+				}
+			}
+</script>
+{template 'common/footer'}

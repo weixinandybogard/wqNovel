@@ -1,0 +1,56 @@
+{template 'common/header'}
+<div class="main">
+	<form id='add_form' action="./index.php">
+		<div style="height: 30px; position: relatvie; width: 100%;">
+			<ul>
+				<li
+					style='text-decoration: none; ist-style: none; float: left; border: 1px solid #FFFFFF;'>会员说明:</li>
+				<li><textarea placeholder="" id='member_memo'
+						name='member_memo' type='text' style='width: 70%; height: 300px;'></textarea></li>
+				<li></li>
+			</ul>
+
+			<ul>
+				<li><input type='button' onclick='onSave()' value='保存' /></li>
+			</ul>
+		</div>
+	</form>
+</div>
+<script>
+	var member_memo = document.getElementById('member_memo');
+
+	var xml_http;
+	if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+		xml_http = new XMLHttpRequest();
+	} else {// code for IE6, IE5
+		xml_http = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	member_memo.value = '{$data[0]['member_memo']}';
+	console.log(member_memo.value);
+	//保存记录
+	function onSave() {
+		var updataValue = member_memo.value
+		updataValue = updataValue.replace(/\r\n/g, '\\n')
+		updataValue = updataValue.replace(/\n/g,'\\n')
+		//console.log(member_memo.value);
+		xml_http.onreadystatechange = function() {
+			//alert(xml_http.status);
+			//console.log(xml_http.status);
+			if (xml_http.readyState == 4 && xml_http.status == 200) {
+				//document.getElementById("myDiv").innerHTML=;
+
+				//console.log(xml_http.responseText);
+				alert(xml_http.responseText);
+
+			}
+		};
+
+		xml_http.open("GET",
+				"index.php?c=site&a=entry&do=UpdataMemberMemo&m=wqnovel&member_memo="
+						+ updataValue, true);
+		xml_http.setRequestHeader("Content-type",
+				"application/x-www-form-urlencoded");
+		xml_http.send();
+	}
+</script>
+{template 'common/footer'}

@@ -1,0 +1,55 @@
+{template 'common/header'}
+<div class="main">
+	<ul class="nav nav-tabs">
+		{if $_GPC['kind']=='充值说明'}
+		<li class="active"><a
+			href="{php echo $this->createWebUrl('rechargememo',array('kind'=>'充值说明'))}">充值说明</a></li>
+		{/if}
+	</ul>
+	{if $_GPC['kind']=='充值说明'}
+	<form id='add_form' action="./index.php">
+		<div style="height: 30px; position: relatvie; width: 100%;">
+			<ul>
+				<li
+					style='text-decoration: none; ist-style: none; float: left; border: 1px solid #FFFFFF;'>说明:</li>
+				<li><textarea id='memo' style='width: 90%; height: 300px;'></textarea></li>
+			</ul>
+			<ul>
+				<li><input type='button' onclick='onSave()' value='保存' /></li>
+			</ul>
+		</div>
+	</form>
+	{/if}
+</div>
+<script>
+	var memo = document.getElementById('memo')
+	var xml_http;
+	if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+		xml_http = new XMLHttpRequest();
+	} else {// code for IE6, IE5
+		xml_http = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+
+
+	memo.value = '{$data[0]['memo']}';
+	function onSave() {
+
+		//console.log(memo.value);
+		var updataValue = memo.value;
+		updataValue = updataValue.replace(/\r\n/g, '\\n')
+		updataValue = updataValue.replace(/\n/g,'\\n')
+		xml_http.onreadystatechange = function() {
+			//alert(xml_http.status);
+			//console.log(xml_http.status);
+
+			if (xml_http.readyState == 4 && xml_http.status == 200) {
+				alert(xml_http.responseText)
+			}
+		}
+		xml_http.open("GET",
+				"./index.php?c=site&a=entry&do=rechargememoUpdate&m=wqnovel&memo="
+						+ updataValue, true);
+		xml_http.send();
+	}
+</script>
+{template 'common/footer'}

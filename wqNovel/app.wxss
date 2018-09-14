@@ -1,0 +1,38 @@
+/**app.wxss**/
+@import 'wqNovel/resource/style/weui.wxss';
+@import 'wqNovel/resource/style/we7.wxss';
+
+/* 去掉默认滚动条 */
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+
+.container {
+  height: 100%;
+  display: flex;
+  font-size: 12px;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 50rpx;
+  box-sizing: border-box;
+}
+.tuijian-view-item {
+  display: flex;
+  flex-direction: column;
+  margin-right: 10rpx;
+}
+
+.tuijian-view-image {
+  height: 200rpx;
+  width: 200rpx;
+}
+
+.tuijian-view-image-text {
+  text-align: center;
+}
+
+.divideItem-scroll-radio {
+  margin-right: 10rpx;
+}

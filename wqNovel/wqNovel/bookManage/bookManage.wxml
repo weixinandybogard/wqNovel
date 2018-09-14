@@ -1,0 +1,21 @@
+<!--pages/bookManage/bookManage.wxml-->
+<view class='bookManage'>
+  <view class='detail'>
+    <checkbox-group bindchange="checkboxChange">
+      <block wx:for="{{dataList}}">
+        <view class='detail-item'>
+          <checkbox value='{{item.auto_id}}' checked='{{item.checked}}'></checkbox>
+          <image class='detail-item-image' src='{{item.src}}'></image>
+          <text>{{item.title}}</text>
+        </view>
+
+
+      </block>
+    </checkbox-group>
+  </view>
+  <view class='control'>
+
+    <button bindtap='onDel' class='control-button'>删除</button>
+    <button bindtap='onSelectAll' class='control-button'>{{buttonSelectText}}</button>
+  </view>
+</view>

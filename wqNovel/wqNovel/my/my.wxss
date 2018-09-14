@@ -1,0 +1,58 @@
+/* pages/my/my.wxss */
+
+.container2 {
+}
+
+.topMy {
+  display: flex;
+  flex-direction: column;
+  height: 200rpx;
+  background-color: rgba(238, 234, 226, 0.712);
+  align-items: center;
+  justify-content: center;
+}
+
+.topMy-image {
+  display: flex;
+  height: 100rpx;
+  width: 100rpx;
+}
+
+.topMy-text {
+  color: #fff;
+}
+
+.myBookBi {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 10rpx;
+  margin-bottom: 10rpx;
+  padding-left: 30rpx;
+  padding-right: 30rpx;
+  border-bottom-color: rgba(238, 234, 226, 0.712);
+  border-bottom-width: 1rpx;
+  border-bottom-style: outset;
+}
+
+.myBookBi-text-black {
+  color: #000;
+}
+
+.myBookBi-text-red {
+  color: #f00;
+  flex-grow: 1;
+  text-align: right;
+  margin-right: 10rpx;
+}
+
+.myBookBi-button {
+  color: #f00;
+  border-color: #f00;
+  border-width: 1rpx;
+  border-style: outset;
+  height: 80rpx;
+  text-align: center;
+  line-height: 80rpx;
+  margin-bottom: 10rpx;
+}

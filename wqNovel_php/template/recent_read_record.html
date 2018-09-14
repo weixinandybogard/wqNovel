@@ -1,0 +1,133 @@
+{template 'common/header'}
+<div class="main">
+	<ul class="nav nav-tabs">
+		{if $_GPC['kind']=='最近阅读列表'}
+		<li class="active"><a
+			href="{php echo $this->createWebUrl('recentreadrecord',array('kind'=>'最近阅读列表'))}">最近阅读列表</a></li>
+	
+		{/if}
+	</ul>
+	{if $_GPC['kind']=='最近阅读列表'}
+	<div style="height: 30px; position: relatvie; width: 100%;">
+		<div
+			style='background-color: #f80;; border-bottom-style: outset; border-bottom-width: 1px; line-height: 30px; height: 30px;; width: 10%; position: relative; float: left; text-align: center'>
+			选择</div>
+		<div
+			style='background-color: #f80;; border-bottom-style: outset; border-bottom-width: 1px; line-height: 30px; height: 30px;; width: 10%; position: relative; float: left; text-align: center'>
+			编号</div>
+		<div
+			style='background-color: #f80;; border-bottom-style: outset; border-bottom-width: 1px; line-height: 30px; height: 30px;; width: 30%; position: relative; float: left; text-align: center'>
+			标题</div>
+		<div
+			style='background-color: #f80;; border-bottom-style: outset; border-bottom-width: 1px; line-height: 30px; height: 30px;; width: 40%; position: relative; float: left; text-align: center'>
+			描述</div>
+		<div
+			style='background-color: #f80;; border-bottom-style: outset; border-bottom-width: 1px; line-height: 30px; height: 30px;; width: 10%; position: relative; float: left; text-align: center'>
+			章编号</div>
+
+	</div>
+	<form id='dataForm' action="./index.php">
+		<input type="hidden" name="a" value="entry" /> <input type="hidden"
+			name="c" value="site" /> <input type="hidden" name="m"
+			value="wqNovel" /> <input id='del_hidden' type="hidden" name="do"
+			value="recentreadrecord" /><input type='hidden' id='current_page'
+			name='current_page' value="{$current_page}" /> <input type='hidden'
+			id='direct' name='direct' value="+" />
+		<div style="height: 30px; position: relatvie; width: 100%;">
+			{loop $data $item}
+			<div style="height: 30px; position: relatvie; width: 100%;">
+				<div
+					style='border-bottom-style: outset; height: 30px; border-bottom-width: 1px; width: 10%; line-height: 30px; position: static; float: left; text-align: center'>
+					<input id="check{$item['auto_id']}"
+						name="checkvalue{$item['auto_id']}" type="checkbox" />
+				</div>
+				<div
+					style='border-bottom-style: outset; height: 30px; border-bottom-width: 1px; overflow: hidden; width: 10%; line-height: 30px; position: static; float: left; text-align: center'>
+					{$item['auto_id']}</div>
+				<div
+					style='border-bottom-style: outset; height: 30px; border-bottom-width: 1px; overflow: hidden; width: 30%; line-height: 30px; position: static; float: left; text-align: center'>
+					{$item['title']}</div>
+					<div
+					style='border-bottom-style: outset; height: 30px; border-bottom-width: 1px; overflow: hidden; width: 40%; line-height: 30px; position: static; float: left; text-align: center'>
+					{$item['des']}</div>
+				<div
+					style='border-bottom-style: outset; height: 30px; border-bottom-width: 1px; overflow: hidden; width: 10%; line-height: 30px; position: static; float: left; text-align: center'>
+					{$item['catalog_auto_id']}</div>
+				
+			</div>
+			{/loop}
+			<div id="command"
+				style='margin-top: 10px; text-align: right; width: 85%;'>
+				{if $is_first==true} <input type="button" onclick='onFirst()'
+					value="首页" />{/if} {if $is_pre==true} <input type="button"
+					onclick="onPre()" value="上一页" />{/if} {if $is_next==true} <input
+					type="button" onclick="onNextPage()" value="下一页" />{/if} {if
+				$is_last==true} <input onclick="onLastPage()" type="button"
+					value="末页" /> {/if}<input type="button" id='selectInput'
+					onclick="onSelect()" value="全选" /> <input type="button"
+					onclick="onDel()" value='删除'></input>
+			</div>
+		</div>
+	</form>
+	{/if}
+	
+</div>
+<script type="text/javascript">
+	var selectInput = document.getElementById('selectInput');//选择按钮
+	var dataForm = document.getElementById('dataForm');//列表表单
+	var current_page = document.getElementById('current_page');//当前页
+	var direct = document.getElementById('direct');//方向
+	var del_hidden = document.getElementById('del_hidden')
+
+	//第一页
+	function onFirst() {
+		direct.value = '+'
+		current_page.value = 0//当前页恢复
+		dataForm.submit()
+	}
+
+	//前一页
+	function onPre() {
+		direct.value = '-';
+		dataForm.submit();
+	}
+	//下一页
+	function onNextPage() {
+		direct.value = '+';
+		dataForm.submit();
+	}
+	//最后一页
+	function onLastPage() {
+		direct.value = "++";
+		dataForm.submit();
+
+	}
+	//删除后当前页复原
+	function onDel() {
+		//alert('fdsfds')
+		del_hidden.value = 'recentreadrecordDel';
+		current_page.value = 0
+
+		dataForm.submit();
+	}
+
+	//选择所有
+
+	function onSelect() {
+		if (selectInput.value == "全选") {
+			{loop $data $item}
+			document.getElementById('check' + {$item['auto_id']}).checked="1";
+
+			{/loop}
+			selectInput.value = '反全选'
+		} else {
+			selectInput.value = '全选'
+			{loop $data $item}
+			document.getElementById('check' + {$item['auto_id']}).checked=null;
+
+			{/loop}
+		}
+	}
+
+</script>
+{template 'common/footer'}
