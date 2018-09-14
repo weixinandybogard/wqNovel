@@ -105,11 +105,18 @@ Page({
 
   onRead: function () {
     try {
+      if (app.globalData.userInfo == null) {//如果是空就退出并提示
+        util.message({
+          title: '请先登录'
+        })
+        return
+      }
       var that = this
       app.util.request({//查看是否有权限读
         url: 'entry/wxapp/IsHasRightToRead',
         data: {
-          introduce_auto_id: this.data.introduce_auto_id
+          introduce_auto_id: this.data.introduce_auto_id,
+          open_id:app.globalData.userInfo.openid
         },
         success: function (e) {
           try {

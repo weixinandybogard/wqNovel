@@ -1,5 +1,13 @@
 {template 'common/header'}
 <div class="main">
+	<ul class="nav nav-tabs">
+		{if $_GPC['kind']=='消费列表'}
+		<li class="active"><a
+			href="{php echo $this->createWebUrl('buyrecord',array('kind'=>'消费列表'))}">消费列表</a></li>
+		
+		{/if} 
+
+	</ul>
 	<div style="height: 30px; position: relatvie; width: 100%;">
 		<div
 			style='background-color: #f80;; border-bottom-style: outset; border-bottom-width: 1px; line-height: 30px; height: 30px;; width: 15%; position: relative; float: left; text-align: center'>
@@ -18,7 +26,7 @@
 			style='background-color: #f80;; border-bottom-style: outset; border-bottom-width: 1px; line-height: 30px; height: 30px;; width: 20%; position: relative; float: left; text-align: center'>
 			消费时间</div>
 	</div>
-	
+
 	<form id='dataForm' action="./index.php">
 		<input type="hidden" name="a" value="entry" /> <input type="hidden"
 			name="c" value="site" /> <input type="hidden" name="m"
@@ -36,17 +44,17 @@
 						name="checkvalue{$item['auto_id']}" type="checkbox" />
 				</div>
 				<div
-					style='border-bottom-style: outset; height: 30px; border-bottom-width: 1px;  overflow: hidden; width: 15%; line-height: 30px; position: static; float: left; text-align: center'>
+					style='border-bottom-style: outset; height: 30px; border-bottom-width: 1px; overflow: hidden; width: 15%; line-height: 30px; position: static; float: left; text-align: center'>
 					{$item['auto_id']}</div>
 				<div
-					style='border-bottom-style: outset; height: 30px; border-bottom-width: 1px;  overflow: hidden; width: 20%; line-height: 30px; position: static; float: left; text-align: center'>
+					style='border-bottom-style: outset; height: 30px; border-bottom-width: 1px; overflow: hidden; width: 20%; line-height: 30px; position: static; float: left; text-align: center'>
 					{$item['buy_bi']}</div>
 				<div
-					style='border-bottom-style: outset; height: 30px; border-bottom-width: 1px;  overflow: hidden; width: 30%; line-height: 30px; position: static; float: left; text-align: center'>
+					style='border-bottom-style: outset; height: 30px; border-bottom-width: 1px; overflow: hidden; width: 30%; line-height: 30px; position: static; float: left; text-align: center'>
 					{$item['buy_use_for']}</div>
 
 				<div
-					style='border-bottom-style: outset; height: 30px; border-bottom-width: 1px;  overflow: hidden; width: 20%; line-height: 30px; position: static; float: left; text-align: center'>
+					style='border-bottom-style: outset; height: 30px; border-bottom-width: 1px; overflow: hidden; width: 20%; line-height: 30px; position: static; float: left; text-align: center'>
 					{$item['buy_time']}</div>
 
 			</div>

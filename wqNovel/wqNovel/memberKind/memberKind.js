@@ -12,6 +12,13 @@ Page({
   ,
   onItemCllick: function (e) {
     try {
+      if (app.globalData.userInfo == null) {//如果是空就退出并提示
+        util.message({
+          title: '请先登录'
+        })
+        return
+      }
+      // console.log(app.globalData.userInfo);
       // app.util.request({//开通会员
       //   url: 'entry/wxapp/StartMember',
       //   success: function (e) {

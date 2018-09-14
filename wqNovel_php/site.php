@@ -380,6 +380,10 @@ class WqNovelModuleSite extends WeModuleSite {
 		$total_page = $this->get_total_page ( $this::BUYRECORD );
 		// 获取总页数
 		
+		if (isset ( $_GPC ['kind'] ) == false) {
+			$_GPC ['kind'] = '消费列表';
+		}
+		
 		if ($_GPC ['direct'] == '') { // 如果还未设置就先设置
 			$_GPC ['direct'] = '+';
 			// print "fdsfdsfds";

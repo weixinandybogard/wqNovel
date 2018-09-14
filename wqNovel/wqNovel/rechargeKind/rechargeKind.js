@@ -108,7 +108,8 @@ Page({
                       app.util.request({//插入充值记录
                         url: 'entry/wxapp/InsertRechargeRecord',
                         data: {
-                          sum: e.currentTarget.dataset.money
+                          sum: e.currentTarget.dataset.money,
+                          open_id: app.globalData.userInfo.openid
                         },
                         success: function (InsertRechargeRecord) {
                           // console.log(InsertRechargeRecord)
@@ -138,6 +139,25 @@ Page({
 
   onPay: function (e) {
     try {
+
+      if (app.globalData.userInfo == null) {//如果是空就退出并提示
+        util.message({
+          title: '请先登录'
+        })
+        return
+      }
+
+      // app.util.request({//插入充值记录
+      //   url: 'entry/wxapp/InsertRechargeRecord',
+      //   data: {
+      //     sum: e.currentTarget.dataset.money,
+      //     open_id: app.globalData.userInfo.openid
+      //   },
+      //   success: function (InsertRechargeRecord) {
+      //     // console.log(InsertRechargeRecord)
+      //   }
+      // })
+
       var that = this
       app.util.request({
         url: 'entry/wxapp/IsMemberByReturn',
@@ -183,7 +203,7 @@ Page({
             that.setData({
               memo: e.data.data[0].memo.replace(/\\n/g, "\n")
             })
-        
+
           } catch (e) {
             console.error('success')
             console.error(e)

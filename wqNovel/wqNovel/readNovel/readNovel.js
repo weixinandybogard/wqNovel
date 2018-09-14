@@ -94,21 +94,25 @@ Page({
       var that = this
       if (options.catalog_auto_id != undefined) { //如果是章节列表
 
-
-        app.util.request({//插入阅读历史
-          url: 'entry/wxapp/InsertRecentReadRecord',
-          data: {
-            catalog_auto_id: options.catalog_auto_id
-          },
-          success: function (e) {
-            try {
-              // console.log(e)
-            } catch (e) {
-              console.error('success')
-              console.error(e)
+        if (app.globalData.userInfo != null) {//必须存在open_id
+        
+          app.util.request({//插入阅读历史
+            url: 'entry/wxapp/InsertRecentReadRecord',
+            data: {
+              catalog_auto_id: options.catalog_auto_id,
+              open_id: app.globalData.userInfo.openid
+            },
+            success: function (e) {
+              try {
+                // console.log(e)
+              } catch (e) {
+                console.error('success')
+                console.error(e)
+              }
             }
-          }
-        })
+          })
+        }
+
 
         app.util.request({ //章节获取小说内容
           url: 'entry/wxapp/GetReadNovelByCatalog',

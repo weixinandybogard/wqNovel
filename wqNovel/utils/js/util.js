@@ -142,7 +142,7 @@ util.request = function (option) {
         if (option.success && typeof option.success == 'function') {
           option.success(cachedata);
         }
-        console.log('failreadcache:' + url);
+        // console.log('failreadcache:' + url);
         return true;
       } else {
         if (option.fail && typeof option.fail == 'function') {
@@ -204,6 +204,7 @@ util.url = function (action, querystring) {
 
 
 util.getData = function (that, moduleName) {
+  let app = getApp();
   that.data.currentpage++
   if (that.data.currentpage > that.data.totalpage) {//如果超过就提示
     util.message({
@@ -211,11 +212,18 @@ util.getData = function (that, moduleName) {
     })
     return
   }
+  if (app.globalData.userInfo == null) {//如果是空就退出并提示
+    util.message({
+      title: '请先登录'
+    })
+    return
+  }
   // console.log(that.data.autoid)
   util.request({//获取数据
     url: 'entry/wxapp/' + moduleName,
     data: {
-      autoid: that.data.autoid
+      autoid: that.data.autoid,
+      open_id: app.globalData.userInfo.openid
     },
     success: function (e) {
       try {
@@ -343,7 +351,7 @@ util.getWe7User = function (cb, code) {
     cachetime: 0,
     showLoading: false,
     success: function (session) {
-      
+
       if (!session.data.errno) {
         userInfo.sessionid = session.data.data.sessionid
         userInfo.memberInfo = session.data.data.userinfo

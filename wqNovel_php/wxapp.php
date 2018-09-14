@@ -52,8 +52,6 @@ class WqNovelModuleWxapp extends WeModuleWxapp {
 		return isset ( $this->gpc [$key] ) ? $this->gpc [$key] : $default;
 	}
 	
-
-	
 	/**
 	 * 获取精品轮播图数据
 	 */
@@ -135,7 +133,7 @@ class WqNovelModuleWxapp extends WeModuleWxapp {
 		// 计算总页数
 		$totalRecord = $data [0] ['count(*)'];
 		$totalPage = ( int ) ($totalRecord / 20);
-		if ($totalRecord % 20 != 0 || $totalRecord<20) {
+		if ($totalRecord % 20 != 0 || $totalRecord < 20) {
 			$totalPage ++; //
 		}
 		// 计算总页数
@@ -225,11 +223,14 @@ class WqNovelModuleWxapp extends WeModuleWxapp {
 	/**
 	 * 分页下拉办法
 	 */
-	private function doPageRecord($table) {
-		$condistion = ""; // $this->gpc['autoid'];
+	private function doPageRecord($table, $talbe_condition = '') {
+		$condistion = " 1 = 1 "; // $this->gpc['autoid'];
+		if ($talbe_condition != '') {
+			$condistion .= $talbe_condition;
+		}
 		$data = array ();
 		if ($this->gpc ['autoid'] > 0) { // 如果存在自动编号就处理
-			$condistion = " auto_id<" . $this->gpc ['autoid'];
+			$condistion = " and auto_id<" . $this->gpc ['autoid'];
 		}
 		if ($condistion == "") { // 没有直接取20
 			$data = pdo_getall ( $table, array (), array (), array (), array (
@@ -251,20 +252,38 @@ class WqNovelModuleWxapp extends WeModuleWxapp {
 	 * 充值记录
 	 */
 	public function doPageAddMoneyRecord() {
-		$this->doPageRecord ( $this::ADDMONEYRECORD );
+		$condition = '';
+		// 获取open-id
+		if ($this->get ( 'open_id' ) != null) {
+			$condition = " and open_id='" . $this->get ( 'open_id' ) . "'";
+		}
+		// 获取open-id
+		$this->doPageRecord ( $this::ADDMONEYRECORD, $condition );
 	}
 	/**
 	 * 消费记录
 	 */
 	public function doPageBuyRecord() {
-		$this->doPageRecord ( $this::BUYRECORD );
+		$condition = '';
+		// 获取open-id
+		if ($this->get ( 'open_id' ) != null) {
+			$condition = " and open_id='" . $this->get ( 'open_id' ) . "'";
+		}
+		// 获取open-id
+		$this->doPageRecord ( $this::BUYRECORD, $condition );
 	}
 	
 	/**
 	 * 最近阅读记录
 	 */
 	public function doPageRecentReadRecord() {
-		$this->doPageRecord ( $this::RECENTREADRECORD ); // 最近阅读
+		$condition = '';
+		// 获取open-id
+		if ($this->get ( 'open_id' ) != null) {
+			$condition = " and open_id='" . $this->get ( 'open_id' ) . "'";
+		}
+		// 获取open-id
+		$this->doPageRecord ( $this::RECENTREADRECORD, $condition ); // 最近阅读
 	}
 	public function doPageContactUs() {
 		$data = pdo_getall ( $this::CONTACTUS, array (), array (), array (), array (
@@ -618,7 +637,8 @@ INNER JOIN ims_we7_wxapp_instroduce C On B.introduce_auto_id=C.auto_id';
 				pdo_insert ( $this::BUYRECORD, array (
 						'buy_bi' => $bi,
 						'buy_use_for' => $title,
-						'buy_time' => date ( 'Y-m-d H:i:s', time () ) 
+						'buy_time' => date ( 'Y-m-d H:i:s', time () ),
+						'open_id' => $this->get('open_id')
 				) );
 			}
 			$insert = $this->result ( 0, '币更新成功', $data ? 1 : 0 );
@@ -632,13 +652,15 @@ INNER JOIN ims_we7_wxapp_instroduce C On B.introduce_auto_id=C.auto_id';
 	 */
 	public function doPageInsertRecentReadRecord() {
 		$data = pdo_getall ( 'ims_we7_wxapp_catalog A
-Inner join ims_we7_wxapp_instroduce B On A.introduce_auto_id=B.auto_id', ' A.auto_id=' . $this->get ( 'catalog_auto_id' ), ' A.auto_id,B.title,B.des1 ' );
-		
+Inner join ims_we7_wxapp_instroduce B On A.introduce_auto_id=B.auto_id', 'A.auto_id=' . $this->get ( 'catalog_auto_id' ), 'A.auto_id,B.title,B.des1 ' );
+		// print "fdsfds";
+		// print count ( $data );
 		if (count ( $data ) > 0) { // 如果查找到记录
 			$insert = pdo_insert ( $this::RECENTREADRECORD, array (
 					'title' => $data [0] ['title'],
 					'des' => $data [0] ['des1'],
-					'catalog_auto_id' => $data [0] ['auto_id'] 
+					'catalog_auto_id' => $data [0] ['auto_id'],
+					'open_id' => $this->get ( 'open_id' ) 
 			) );
 			
 			if ($insert) {
@@ -653,15 +675,10 @@ Inner join ims_we7_wxapp_instroduce B On A.introduce_auto_id=B.auto_id', ' A.aut
 	 * 插入新的充值记录
 	 */
 	public function doPageInsertRechargeRecord() {
-		// date_default_timezone_set('PRC');//就可以了。
-		
-		// date_default_timezone_set('Asia/Shanghai');
-		
-		// echo date('Y-m-d H:i:s',time());;
-		// exit();
 		$insert = pdo_insert ( $this::ADDMONEYRECORD, array (
 				'add_money' => $this->get ( 'sum' ),
-				'add_money_time' => date ( 'Y-m-d H:i:s', time () ) 
+				'add_money_time' => date ( 'Y-m-d H:i:s', time () ),
+				'open_id' => $this->get ( 'open_id' ) 
 		) );
 		
 		if ($insert) {

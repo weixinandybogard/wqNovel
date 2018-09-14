@@ -48,6 +48,6 @@ App({
     'uniacid': '2',
     'acid': '100384',
     'version': '1.0.0',
-    'siteroot': 'http://192.168.0.198/we77/app/index.php',
+    'siteroot': 'http://192.168.0.198/we88/app/index.php',
   }
 })

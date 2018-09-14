@@ -15,10 +15,17 @@ Page({
       // console.log(this.data.dataList[e.currentTarget.dataset.index].introduce_auto_id);
       // console.log(e.currentTarget.dataset.index)
       // console.log(e.currentTarget.dataset.autoid);
+      if (app.globalData.userInfo == null) {//如果是空就退出并提示
+        util.message({
+          title: '请先登录'
+        })
+        return
+      }
       app.util.request({//查看是否存在权限
         url: 'entry/wxapp/IsHasRightToRead',
         data: {
-          introduce_auto_id: this.data.dataList[e.currentTarget.dataset.index].introduce_auto_id
+          introduce_auto_id: this.data.dataList[e.currentTarget.dataset.index].introduce_auto_id,
+          open_id:app.globalData.userInfo.openid
         },
         success: function (res) {
           try {
