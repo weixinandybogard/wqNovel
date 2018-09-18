@@ -1,0 +1,30 @@
+<!--pages/startMember/startMember.wxml-->
+<view class='startMember'>
+  <view class='lineone'>
+    <text class='lineone-text'>请选择充值套餐:</text>
+  </view>
+  <block wx:for="{{dataList}}">
+    <view class='linetwo'>
+      <view bindtap='onItemCllick' data-money='{{item.money1}}' class='linetwo-left'>
+        <text class='linetwo-left-text' style=' color: #f00;'>{{item.member_kind1}}</text>
+        <text class='linetwo-left-text'>{{item.member_day1}}</text>
+        <text class='linetwo-left-text'>{{item.money1}}元</text>
+      </view>
+
+      <view wx:if="{{item.member_kind2!=undefined}}" data-money='{{item.money2}}' bindtap='onItemCllick' class='linetwo-right'>
+
+        <text class='linetwo-right-text' style=' color: #f00;'>{{item.member_kind2}}</text>
+        <text class='linetwo-right-text'>{{item.member_day2}}</text>
+        <text class='linetwo-right-text'>{{item.money2}}元</text>
+      </view>
+      <view wx:elif="{{item.member_kind2==undefined}}" data-money='{{item.money2}}' style=' border-width: 0rpx;' bindtap='onItemCllick' class='linetwo-right'>
+        <text class='linetwo-right-text' style=' color: #f00;'>{{item.member_kind2}}</text>
+        <text class='linetwo-right-text'>{{item.member_day2}}</text>
+        <text class='linetwo-right-text'>{{item.money2}}</text>
+      </view>
+    </view>
+  </block>
+  <view class='linethree'>
+    <text class='linethree-text'>{{memo}}</text>
+  </view>
+</view>

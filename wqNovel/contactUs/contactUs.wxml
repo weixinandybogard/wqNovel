@@ -1,0 +1,12 @@
+<!--pages/contactUs/contactUs.wxml-->
+<view>
+  <view class='lineone'>
+    <text class='lineone-text'>客服</text>
+  </view>
+  <view class='detail'>
+    <text class='detail-text'>工作时间:{{workTime}}</text>
+    <text class='detail-text'>客户邮箱:{{EM}}</text>
+    <text class='detail-text'>客服QQ:{{QQ}}</text>
+    <text class='detail-text'>微信:{{weixin}}</text>
+  </view>
+</view>

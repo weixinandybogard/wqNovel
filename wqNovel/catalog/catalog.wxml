@@ -1,0 +1,7 @@
+<!--pages/catalog/catalog.wxml-->
+<view class='catalog'>
+  <label wx:for='{{dataList}}'>
+    <view bindtap='onItemClick' data-index='{{index}}' data-AutoId='{{item.auto_id}}' class='detail'>{{item.catalog}}</view>
+  </label>
+
+</view>

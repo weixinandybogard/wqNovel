@@ -1,0 +1,44 @@
+<!--pages/my/my.wxml-->
+<!--pages/my/my.wxml-->
+<view class='container2'>
+  <view class='topMy'>
+    <!-- <image class='topMy-image' src='{{headsrc}}'></image>
+    <text class='topMy-text'>{{nickName}}</text> -->
+
+    <open-data class='topMy-image' type="userAvatarUrl"></open-data>
+    <open-data class='topMy-text' style='color:#000;' type="userNickName"></open-data>
+  </view>
+  <view class='myBookBi'>
+    <text class='myBookBi-text-black'>我的书币</text>
+    <text class='myBookBi-text-red'>书币:{{shubi}}</text>
+    <button bindtap='onRecharge' class='myBookBi-button'>充值</button>
+  </view>
+  <view bindtap='onStartMember' class='myBookBi'>
+    <text class='myBookBi-text-black' style='color:#f00;margin-bottom: 10rpx;flex-grow: 1;'>开通会员</text>
+    <text>{{jianyou}}</text>
+  </view>
+  <view bindtap='onShare' class='myBookBi' style='border-bottom-width: 0rpx;'>
+    <text class='myBookBi-text-black' style='color:#f00;margin-bottom: 10rpx;flex-grow: 1;'>邀请好友</text>
+    <text>{{jianyou}}</text>
+  </view>
+  <view style='height:30rpx;background-color: rgba(238, 234, 226, 0.712);'></view>
+  <view class='myBookBi'>
+    <text bindtap='onAddMoneyRecord' class='myBookBi-text-black' style='color:#000;margin-bottom: 10rpx;flex-grow: 1;'>充值记录</text>
+    <text>{{jianyou}}</text>
+  </view>
+  <view class='myBookBi' style='border-bottom-width: 0rpx;;'>
+    <text bindtap='onBuyRecord' class='myBookBi-text-black' style='color:#000;margin-bottom: 10rpx;flex-grow: 1;'>消费记录</text>
+    <text>{{jianyou}}</text>
+  </view>
+  <view style='height:30rpx;background-color: rgba(238, 234, 226, 0.712);'></view>
+  <view bindtap='onRecentRead' class='myBookBi'>
+    <text class='myBookBi-text-black' style='color:#000;margin-bottom: 10rpx;flex-grow: 1;'>最近阅读</text>
+    <text>{{jianyou}}</text>
+  </view>
+  <view class='myBookBi'>
+    <text bindtap='onContactUs' class='myBookBi-text-black' style='color:#000;margin-bottom: 10rpx;flex-grow: 1;'>联系我们</text>
+    <text>{{jianyou}}</text>
+  </view>
+</view>
+<import src="/wqNovel/templates/footer.wxml" />
+<template is="footerWx" data="{{...tabBar}}" />

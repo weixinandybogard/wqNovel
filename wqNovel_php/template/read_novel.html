@@ -145,6 +145,10 @@
 			return
 		}
 		
+		var updataValue = content.value;
+		updataValue = updataValue.replace(/\r\n/g, '\\n')
+		updataValue = updataValue.replace(/\n/g,'\\n')
+		
 		
 		xml_http.onreadystatechange = function()
 		{
@@ -157,7 +161,7 @@
 		  }
 		}
 		xml_http.open("GET","./index.php?c=site&a=entry&do=readnovelInsert&m=wqnovel&catalog_auto_id=" + catalog_auto_id.value + 
-				"&content=" + content.value ,true);
+				"&content=" + updataValue ,true);
 		xml_http.send()
 	}
 	

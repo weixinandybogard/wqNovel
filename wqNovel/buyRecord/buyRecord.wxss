@@ -1,0 +1,41 @@
+/* pages/buyRecord/buyRecord.wxss */
+
+.title {
+  position: fixed;
+  width: 100%;
+  height: 100rpx;
+  background-color: #fff;
+  z-index: 1;
+}
+
+.title-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 100rpx;
+}
+
+.title-container-text {
+  color: #f00;
+  flex-grow: 1;
+  text-align: center;
+}
+
+.detail {
+  width: 100%;
+  position: relative;
+  top: 100rpx;
+  height: 100%;
+  background-color: rgba(238, 234, 226, 0.712);
+}
+
+.detail-item {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.detail-item-text {
+  flex-grow: 1;
+  text-align: center;
+}
